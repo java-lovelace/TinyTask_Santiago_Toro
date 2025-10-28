@@ -101,7 +101,7 @@ function renderTask(tasks){
     tasks.forEach(task => {
         const row = document.createElement('tr');
         row.classList.add('border-b');
-        const priorityColor = task.priority === 'High' ? 'bg-red-400 rounded' : task.priority === 'Mid' ? 'bg-yellow-400 rounded' : 'bg-green-400 rounded';
+        const priorityColor = task.priority === 'High' ? 'bg-red-100 rounded' : task.priority === 'Mid' ? 'bg-yellow-100 rounded' : 'bg-green-100 rounded';
         row.innerHTML = `
             <td class="px-6 py-3">${task.id}</td>
             <td class="px-6 py-3">${task.title}</td>
