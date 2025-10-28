@@ -2,9 +2,9 @@ import { api } from "./api.js";
 
 document.getElementById('createButton').addEventListener('click', async () => {
     const {value: formvalues} = await Swal.fire({
-        title: 'Add a new course',
+        title: 'Add a new task',
         html: `
-            <input type="text" id="courseTitle" class="swal2-input" placeholder="Course Title">
+            <input type="text" id="courseTitle" class="swal2-input" placeholder="Task Title">
             <textarea id="courseDescription" class="swal2-input" placeholder="Description"></textarea>
             <select name="" id="PrioritySelect">
             <option value="High">High</option>
@@ -101,11 +101,12 @@ function renderTask(tasks){
     tasks.forEach(task => {
         const row = document.createElement('tr');
         row.classList.add('border-b');
+        const priorityColor = task.priority === 'High' ? 'bg-red-400 rounded' : task.priority === 'Mid' ? 'bg-yellow-400 rounded' : 'bg-green-400 rounded';
         row.innerHTML = `
             <td class="px-6 py-3">${task.id}</td>
             <td class="px-6 py-3">${task.title}</td>
             <td class="px-6 py-3">${task.description}</td>
-            <td class="px-6 py-3">${task.priority}</td>
+            <td class="px-6 py-3 ${priorityColor}">${task.priority}</td>
             <td class="px-6 py-3 text-center">
             <span
               class="px-3 py-1 rounded ${task.done ? 'bg-green-500' : 'bg-gray-400'} text-white">
@@ -114,7 +115,7 @@ function renderTask(tasks){
              </td>
              <td class="px-6 py-3 text-center">
              <button onclick="deleteTask(${task.id})" class="px-3 py-1 rounded bg-red-500 text-white">Delete</button>
-             <button onclick="toggleDone(${task.id})" class="px-3 py-1 rounded bg-blue-500 text-white">Complete</button>
+             <button onclick="toggleDone(${task.id})" class="px-3 py-1 rounded bg-blue-500 text-white">${task.done ? 'Mark Pending' : 'Complete'}</button>
              </td>
         `;
         taskBody.appendChild(row);
